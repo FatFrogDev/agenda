@@ -1,15 +1,32 @@
 package org.globant.agenda.agenda.model;
 
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.ColumnDefault;
 
-
+@Entity
 public class Person {
-   
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Size(min = 1,max = 20)
+    @NotNull
     private String name;
+    @Size(min = 1,max = 20)
+    @NotNull
     private String lastname;
+    @Size(min = 5,max = 70)
+    @NotNull
     private String address;
+    @NotNull
     private String[] cellphone;
-    private boolean isManager;    
+    @NotNull
+    @Column(columnDefinition = "default false")
+    private boolean isManager;
     
     public Person(){}
 
