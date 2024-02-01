@@ -2,35 +2,44 @@ package org.globant.agenda.agenda.model;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+
 import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.ColumnDefault;
+
 
 @Entity
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @Size(min = 1,max = 20)
-    @NotNull
+    @NotEmpty
+
     private String name;
     @Size(min = 1,max = 20)
-    @NotNull
+    @NotEmpty
+
     private String lastname;
     @Size(min = 5,max = 70)
-    @NotNull
+    @NotEmpty
+
     private String address;
-    @NotNull
+    @NotEmpty
+
     private String[] cellphone;
-    @NotNull
-    @Column(columnDefinition = "default false")
+    
+    @Column(columnDefinition = "boolean default false")
     private boolean isManager;
     
     public Person(){}
+    
 
-    public Person(String name, String lastname, String address, String[] cellphone, boolean isManager) {
+    public Person(Integer id, @Size(min = 1, max = 20) @NotEmpty String name,
+            @Size(min = 1, max = 20) @NotEmpty String lastname, @Size(min = 5, max = 70) @NotEmpty String address,
+            @NotEmpty String[] cellphone, boolean isManager) {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.address = address;

@@ -1,16 +1,16 @@
 package org.globant.agenda.agenda.controllers;
 
-import org.springframework.stereotype.Controller;
+import org.globant.agenda.agenda.model.Person;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-
-
-@Controller
+@RestController
 public class GeneralController {
 
     @GetMapping(path = {"/index"})
-    public String index(){
-        return "index";
+    public Person index(){
+        return new Person();
     }
 
     @GetMapping(path = {"/api"})
