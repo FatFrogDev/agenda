@@ -1,4 +1,7 @@
-<img src="/img/agenda-logo.png" width="200" height="200">
+[Agenda logo]: #
+<p align="center">
+  <img src="/img/agenda-logo.png" alt="Agenda logo" width="200" height="200"/>
+</p>
 
 # Agenda
 
