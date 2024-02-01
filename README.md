@@ -1,4 +1,4 @@
-![Logo of Agenda App](https://cdn.vectorstock.com/i/preview-1x/15/88 agenda-rgb-color-icon-vector-37041588.jpg)
+<img src="/img/agenda-logo.png" width="200" height="200">
 
 # Agenda
 
