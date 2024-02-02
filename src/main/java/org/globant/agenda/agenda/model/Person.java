@@ -3,7 +3,7 @@ package org.globant.agenda.agenda.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 
@@ -26,8 +26,9 @@ public class Person {
     @NotEmpty
 
     private String address;
-    @NotEmpty
-
+    
+    @NotNull
+    @Size(min = 1)
     private String[] cellphone;
     
     @Column(columnDefinition = "boolean default false")
