@@ -14,17 +14,18 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
+
     @Size(min = 1,max = 20)
     @NotEmpty
-
     private String name;
+
     @Size(min = 1,max = 20)
     @NotEmpty
-
     private String lastname;
     @Size(min = 5,max = 70)
-    @NotEmpty
 
+    @NotEmpty
     private String address;
     
     @NotNull
@@ -41,24 +42,32 @@ public class Person {
             @Size(min = 1, max = 20) @NotEmpty String lastname, @Size(min = 5, max = 70) @NotEmpty String address,
             @NotEmpty String[] cellphone, boolean isManager) {
         this.id = id;
-        this.name = name;
-        this.lastname = lastname;
+        this.name = name.toLowerCase();
+        this.lastname = lastname.toLowerCase();
         this.address = address;
         this.cellphone = cellphone;
         this.isManager = isManager;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
     public String getLastname() {
         return lastname;
     }
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastname = lastname.toLowerCase();
     }
     public String getAddress() {
         return address;
