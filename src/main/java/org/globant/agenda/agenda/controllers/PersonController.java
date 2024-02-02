@@ -8,6 +8,7 @@ import java.util.List;
 import org.globant.agenda.agenda.exceptions.ResourceNotFoundException;
 import org.globant.agenda.agenda.model.Person;
 import org.globant.agenda.agenda.repository.PersonRepository;
+import org.globant.agenda.agenda.service.PersonServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,10 +29,19 @@ public class PersonController {
 
     @Autowired
     PersonRepository personRepository;
+    
+    PersonServiceImpl personServiceImpl = new PersonServiceImpl();
 
     @SuppressWarnings("null")
     @PostMapping("/person")
     public Person savePerson(@RequestBody Person person) {
+        Boolean personSaved = personServiceImpl.savePerson(person);
+
+        if (!personSaved) {
+            System.out.println("EL SUJETO YA EXISTE.");
+            return null;
+        }
+
         return personRepository.save(person);
     }
 
