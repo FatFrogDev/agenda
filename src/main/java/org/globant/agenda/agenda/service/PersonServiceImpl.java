@@ -1,5 +1,7 @@
 package org.globant.agenda.agenda.service;
 
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +28,19 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public void save(Person person) {
         personRepository.save(person);
+    }
+
+
+
+    @Override
+    public boolean savePerson(Person person)  {
+        return personRepository.savePerson(
+                person.getAddress(),
+                Arrays.toString(person.getCellphone() ),
+                person.isManager(),
+                person.getLastname(),
+                person.getName()
+        );
     }
 
     @Override
