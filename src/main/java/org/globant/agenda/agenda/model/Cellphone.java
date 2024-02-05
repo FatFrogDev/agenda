@@ -1,20 +1,23 @@
 package org.globant.agenda.agenda.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Cellphone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
     private Person person;
 
+    @Column(unique = true)
+    @NotEmpty
     private String number;
 
     public Cellphone(Integer id, Person person, @Size(min=1) String number) {

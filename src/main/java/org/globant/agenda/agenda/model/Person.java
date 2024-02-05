@@ -1,6 +1,7 @@
 package org.globant.agenda.agenda.model;
 
 
+import java.util.List;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -13,8 +14,6 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-
 
     @Size(min = 1,max = 20)
     @NotEmpty
@@ -30,22 +29,37 @@ public class Person {
     
     @NotNull
     @Size(min = 1)
-    private String[] cellphone;
+    @Transient
+    @OneToMany
+    private List<Cellphone> cellphones;
     
     @Column(columnDefinition = "boolean default false")
     private boolean isManager;
-    
-    public Person(){}
-    
+
+    private String orderName(String str){
+            char[] name = str.toLowerCase().toCharArray();
+            boolean foundWord = false;
+            for (int index = 0; index < name.length; index++) {
+                if(!foundWord && Character.isLetter(name[index])){
+                    name[index] = Character.toUpperCase(name[index]);
+                    foundWord = true;
+                }else if (Character.isWhitespace(name[index])){
+                    foundWord = false;
+                }
+            }
+            return String.valueOf(str);
+    }
+
+    public Person(){}   
 
     public Person(Integer id, @Size(min = 1, max = 20) @NotEmpty String name,
             @Size(min = 1, max = 20) @NotEmpty String lastname, @Size(min = 5, max = 70) @NotEmpty String address,
-            @NotEmpty String[] cellphone, boolean isManager) {
+            @NotNull @Size(min = 1) List<Cellphone> cellphones, boolean isManager) {
         this.id = id;
-        this.name = name.toLowerCase();
-        this.lastname = lastname.toLowerCase();
+        this.name = name;
+        this.lastname = lastname;
         this.address = address;
-        this.cellphone = cellphone;
+        this.cellphones = cellphones;
         this.isManager = isManager;
     }
 
@@ -58,7 +72,7 @@ public class Person {
     }
 
     public String getName() {
-        return name;
+        return orderName(name);
     }
     public void setName(String name) {
         this.name = name.toLowerCase();
@@ -75,16 +89,19 @@ public class Person {
     public void setAddress(String address) {
         this.address = address;
     }
-    public String[] getCellphone() {
-        return cellphone;
-    }
-    public void setCellphone(String[] cellphone) {
-        this.cellphone = cellphone;
-    }
+    
     public boolean isManager() {
         return isManager;
     }
     public void setManager(boolean isManager) {
         this.isManager = isManager;
+    }
+
+    public List<Cellphone> getCellphones() {
+        return List.copyOf(cellphones);
+    }
+
+    public void setCellphones(List<Cellphone> cellphones) {
+        this.cellphones = cellphones;
     }    
 }

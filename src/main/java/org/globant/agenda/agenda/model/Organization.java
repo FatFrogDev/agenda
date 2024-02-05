@@ -32,7 +32,7 @@ public class Organization {
     
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
-    @NotNull //i change "NotEmpty" for "NotNull"
+    @NotNull
     private Person person;
 
     public Organization() {
