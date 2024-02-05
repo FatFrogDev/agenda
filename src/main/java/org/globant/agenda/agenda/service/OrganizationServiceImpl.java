@@ -1,11 +1,14 @@
 package org.globant.agenda.agenda.service;
 
+import org.globant.agenda.agenda.model.Cellphone;
 import org.globant.agenda.agenda.model.Organization;
 import org.globant.agenda.agenda.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Iterator;
 
 public class OrganizationServiceImpl implements OrganizationService {
 
@@ -31,5 +34,6 @@ public class OrganizationServiceImpl implements OrganizationService {
     public void delete(Integer id) {
         organizationRepository.deleteById(id);
     }
+
 
 }

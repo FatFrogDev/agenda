@@ -32,9 +32,10 @@ public class PersonServiceImpl implements PersonService{
 
     @Override
     public boolean savePerson(Person person)  {
+
+        
         return personRepository.savePerson(
                 person.getAddress(),
-                person.getCellphones(),
                 person.isManager(),
                 person.getLastname(),
                 person.getName()

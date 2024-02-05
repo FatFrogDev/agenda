@@ -26,6 +26,11 @@ public class Cellphone {
         this.number = number;
     }
 
+    public Cellphone(Person person, @Size(min=1) String number) {
+        this.person = person;
+        this.number = number;
+    }
+
     public Person getPerson() {
         return person;
     }
