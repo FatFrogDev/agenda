@@ -3,7 +3,6 @@ package org.globant.agenda.agenda.service;
 import java.util.Optional;
 import java.util.List;
 import org.globant.agenda.agenda.model.Cellphone;
-import org.globant.agenda.agenda.model.Organization;
 
 import java.util.Collection;
 

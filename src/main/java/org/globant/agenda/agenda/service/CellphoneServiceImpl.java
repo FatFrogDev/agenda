@@ -45,6 +45,7 @@ public class CellphoneServiceImpl  implements CellphoneService{
         return  repository.findAll();
     }
 
+    @SuppressWarnings("null")
     @Override
     public Optional<Cellphone> findById(Integer id) {
         return repository.findById(id);
@@ -55,11 +56,13 @@ public class CellphoneServiceImpl  implements CellphoneService{
         return repository.findByNumber(phoneNumber);
     }
 
+    @SuppressWarnings("null")
     @Override
     public void save(Cellphone cellphone) {
         repository.save(cellphone);
     }
 
+    @SuppressWarnings("null")
     @Override
     public void delete(Integer id) {
         repository.deleteById(id);

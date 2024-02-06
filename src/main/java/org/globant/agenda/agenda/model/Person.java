@@ -47,7 +47,7 @@ public class Person {
                     foundWord = false;
                 }
             }
-            return String.valueOf(str);
+            return String.valueOf(name);
     }
 
     public Person(){}   
@@ -79,6 +79,10 @@ public class Person {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getFullName() {
+        return orderName(name.concat(" ").concat(lastname));
     }
 
     public String getName() {
@@ -113,5 +117,14 @@ public class Person {
 
     public void setCellphones(Collection<Cellphone> cellphones) {
         this.cellphones = cellphones;
-    }    
+    }
+
+    @Override
+    public String toString() {
+        return "Person [ id=" + id + ", name=" + name + ", lastname=" + lastname + ", address=" + address
+                + ", cellphones=" + cellphones + ", isManager=" + isManager + " ]";
+    }
+
+
+    
 }

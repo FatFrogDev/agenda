@@ -74,4 +74,15 @@ class AgendaApplicationTests {
 
 		System.out.println("Test passed : "+  personServiceImpl.saveWithOneOrMorePhone(person) ); 
 	}
+
+	@Test
+	void testPersonName(){
+		Person person = new Person();
+
+		person.setName("caRol");
+		person.setLastname("martinEz");
+
+		System.out.println(person.toString());
+		System.out.println(person.getFullName());
+	}
 }

@@ -1,6 +1,5 @@
 package org.globant.agenda.agenda.service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +7,6 @@ import org.globant.agenda.agenda.model.Cellphone;
 import org.globant.agenda.agenda.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.globant.agenda.agenda.repository.CellphoneRepository;
 import org.globant.agenda.agenda.repository.PersonRepository;
 import java.util.Collection;
 
@@ -26,12 +24,14 @@ public class PersonServiceImpl implements PersonService{
         return personRepository.findAll();
     }
 
+    @SuppressWarnings("null")
     @Override
     public Optional<Person> findById(Integer id) {
         Optional<Person> person = personRepository.findById(id);
         return person;
     }
 
+    @SuppressWarnings("null")
     @Override
     public void save(Person person) {
         personRepository.save(person);
@@ -47,6 +47,7 @@ public class PersonServiceImpl implements PersonService{
         );
     }
 
+    @SuppressWarnings("null")
     @Override
     public void delete(Integer id) {
         personRepository.deleteById(id);
