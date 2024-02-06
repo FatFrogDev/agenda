@@ -1,6 +1,7 @@
 package org.globant.agenda.agenda.model;
 
 
+import java.util.Collection;
 import java.util.List;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -29,9 +30,8 @@ public class Person {
     
     @NotNull
     @Size(min = 1)
-    @Transient
     @OneToMany
-    private List<Cellphone> cellphones;
+    private Collection<Cellphone> cellphones;
     
     @Column(columnDefinition = "boolean default false")
     private boolean isManager;
@@ -61,6 +61,16 @@ public class Person {
         this.address = address;
         this.cellphones = cellphones;
         this.isManager = isManager;
+    }
+
+    public Person(@NotEmpty String name,
+    @Size(min = 1, max = 20) @NotEmpty String lastname, @Size(min = 5, max = 70) @NotEmpty String address,
+    @NotNull @Size(min = 1) List<Cellphone> cellphones, boolean isManager) {
+    this.name = name;
+    this.lastname = lastname;
+    this.address = address;
+    this.cellphones = cellphones;
+    this.isManager = isManager;
     }
 
     public Integer getId() {
@@ -97,11 +107,11 @@ public class Person {
         this.isManager = isManager;
     }
 
-    public List<Cellphone> getCellphones() {
-        return List.copyOf(cellphones);
+    public Collection<Cellphone> getCellphones() {
+        return  cellphones;
     }
 
-    public void setCellphones(List<Cellphone> cellphones) {
+    public void setCellphones(Collection<Cellphone> cellphones) {
         this.cellphones = cellphones;
     }    
 }

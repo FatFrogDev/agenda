@@ -17,19 +17,22 @@ public class CellphoneServiceImpl  implements CellphoneService{
     CellphoneRepository repository;
 
     @Override
+    @SuppressWarnings("rawtypes")
     public boolean isSaveableCollection(Collection<Cellphone> cellhpones) {
-        Iterator phoneIterator = cellhpones.iterator();
+        final Iterator phoneIterator = cellhpones.iterator();
         boolean result = true;
         while (phoneIterator.hasNext()) {
             final Cellphone phone = (Cellphone) phoneIterator.next();
             result = checkPhoneExists(phone.getNumber());
             if (result){
+                System.out.println("Repeated phone: " + phone.getNumber());
                 return false;
-            }
+            }else result = true;
         }
         return result;
     }
 
+    @SuppressWarnings("null")
     @Override
     public void SaveCollection(Collection<Cellphone> cellhpones) {
             for(Cellphone cellphone:cellhpones){

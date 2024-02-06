@@ -16,4 +16,8 @@ public interface PersonService {
     void delete(Integer id);
 
     boolean savePerson(Person person);
+
+    boolean saveWithOneOrMorePhone(Person person);
+
+    Person getLastPerson();
 }

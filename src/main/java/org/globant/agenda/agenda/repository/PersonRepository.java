@@ -15,4 +15,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
             @Param("in_lastname") String in_lastname,
             @Param("in_name") String in_name
     );
+
+    @Query("SELECT p FROM Person p ORDER BY p.id DESC LIMIT 1")
+    Person getLast();
 }
