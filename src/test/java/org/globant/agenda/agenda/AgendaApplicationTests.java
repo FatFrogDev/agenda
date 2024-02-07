@@ -43,7 +43,7 @@ class AgendaApplicationTests {
 		phones.add(cellphone);
 		phones.add(cellphone0);
 		phones.add(cellphone1);
-		phones.add(cellphone2);
+		phones.add(cellphone2);	
 		phones.add(cellphone3);
 
 		if (cellphoneService.isSaveableCollection(phones)){

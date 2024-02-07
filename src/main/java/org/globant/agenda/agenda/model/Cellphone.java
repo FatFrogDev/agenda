@@ -20,6 +20,9 @@ public class Cellphone {
     @NotEmpty
     private String number;
 
+    public Cellphone() {        
+    }
+
     public Cellphone(Integer id, Person person, @Size(min=1) String number) {
         this.id = id;
         this.person = person;

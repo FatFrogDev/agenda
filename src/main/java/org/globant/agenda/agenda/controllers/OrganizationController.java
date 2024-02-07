@@ -1,17 +1,22 @@
 package org.globant.agenda.agenda.controllers;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.globant.agenda.agenda.exceptions.ResourceNotFoundException;
+import org.globant.agenda.agenda.model.Cellphone;
 import org.globant.agenda.agenda.model.Organization;
 import org.globant.agenda.agenda.model.Person;
+import org.globant.agenda.agenda.repository.CellphoneRepository;
 import org.globant.agenda.agenda.repository.OrganizationRepository;
 import org.globant.agenda.agenda.repository.PersonRepository;
-import org.globant.agenda.agenda.request.OrganizationAndPersonRequest;
+import org.globant.agenda.agenda.request.OrganizationAndPersonAndCellphonesRequest;
+import org.globant.agenda.agenda.service.PersonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,28 +37,44 @@ public class OrganizationController {
     @Autowired
     PersonRepository personRepository;
 
-    @SuppressWarnings("null")
+    @Autowired
+    PersonServiceImpl personServiceImpl;
+
+    @Autowired
+	CellphoneRepository cellphoneRepository;
+    
     @Transactional
     @PostMapping("/organization")
-    public ResponseEntity<Organization> saveOrganizationWithManager(@RequestBody OrganizationAndPersonRequest organizationAndPersonRequest) {
-        try {
+    public ResponseEntity<Organization> saveOrganizationWithManager(@RequestBody OrganizationAndPersonAndCellphonesRequest organizationAndPersonAndCellphoneRequest) {
+        try {            
 
-            Person person = organizationAndPersonRequest.getPerson();
-            Organization organization = organizationAndPersonRequest.getOrganization();            
+            Person person = organizationAndPersonAndCellphoneRequest.getPerson();
+            Organization organization = organizationAndPersonAndCellphoneRequest.getOrganization();    
+            Collection<Cellphone> cellphones = organizationAndPersonAndCellphoneRequest.getCellphone();
 
-            // Save the new person (manager) in the database
-            Person savedPerson = personRepository.save(person);
+            // Set the person to all cellphones of the collection
+            for (Cellphone cellphone : cellphones) {
+                cellphone.setPerson(person);
+            }
 
-            // set the manager person at the organization register
-            organization.setPerson(savedPerson);            
-            Organization savedOrganization = organizationRepository.save(organization);
+            person.setCellphones(cellphones); // Set the list of cellphones to the person
 
-            return ResponseEntity.ok(savedOrganization);
+            if (personServiceImpl.saveWithOneOrMorePhone(person)) {
+                Person personSaved = personRepository.getLast();
+                // Create the organization with the last person
+                organization.setPerson(personSaved);            
+                Organization savedOrganization = organizationRepository.save(organization);
+
+                return ResponseEntity.ok(savedOrganization);
+            } else {
+                throw new RuntimeException("Error saving person with phones");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
 
 
     @GetMapping("/organization")
@@ -92,5 +113,21 @@ public class OrganizationController {
         return ResponseEntity.ok(organizationUpdated);
     }
 
+    @SuppressWarnings("null")
+    @DeleteMapping("/organization/{id}")
+    public Boolean deleteOrganization(@PathVariable @NonNull Integer id) {
+        Organization existingOrganization = organizationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("La organización con el siguiente ID no existe: " + id));
+
+        try {
+            cellphoneRepository.deleteCellphonesByPersonId(existingOrganization.getPerson().getId());
+            organizationRepository.delete(existingOrganization);            
+            personRepository.delete(existingOrganization.getPerson());
+            return true;
+        } catch (Exception e) {
+            System.out.println("ERROR DE TIPO"+e.toString());
+            return false;
+        }
+    }
 
 }

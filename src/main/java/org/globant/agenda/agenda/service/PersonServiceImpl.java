@@ -17,7 +17,7 @@ public class PersonServiceImpl implements PersonService{
     PersonRepository personRepository;
 
     @Autowired
-    CellphoneServiceImpl cellphoneServiceImpl;
+    CellphoneServiceImpl cellphoneServiceImpl = new CellphoneServiceImpl();
 
     @Override
     public List<Person> findAll() {

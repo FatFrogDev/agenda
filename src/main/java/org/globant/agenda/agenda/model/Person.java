@@ -28,9 +28,9 @@ public class Person {
     @NotEmpty
     private String address;
     
-    @NotNull
-    @Size(min = 1)
-    @OneToMany
+    @NotNull    
+    @Size(min = 0)
+    @OneToMany(fetch = FetchType.EAGER)
     private Collection<Cellphone> cellphones;
     
     @Column(columnDefinition = "boolean default false")

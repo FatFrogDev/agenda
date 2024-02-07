@@ -4,8 +4,11 @@ import java.util.Optional;
 
 import org.globant.agenda.agenda.model.Cellphone;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import jakarta.transaction.Transactional;
 
 public interface CellphoneRepository extends JpaRepository<Cellphone,Integer> {
 
@@ -15,5 +18,9 @@ public interface CellphoneRepository extends JpaRepository<Cellphone,Integer> {
     boolean checkPhoneExists(
             @Param("in_phone") String in_phone
     );
-    
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete from Cellphone c where c.person.id = :personId")
+    void deleteCellphonesByPersonId(@Param("personId") Integer personId);
 }
