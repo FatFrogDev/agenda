@@ -1,5 +1,6 @@
 package org.globant.agenda.agenda.model;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
