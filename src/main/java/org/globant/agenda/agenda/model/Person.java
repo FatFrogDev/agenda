@@ -3,6 +3,8 @@ package org.globant.agenda.agenda.model;
 
 import java.util.Collection;
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +12,7 @@ import jakarta.validation.constraints.Size;
 
 
 @Entity
+@Schema(description = "This model holds the person's information")
 public class Person {
 
     @Id
