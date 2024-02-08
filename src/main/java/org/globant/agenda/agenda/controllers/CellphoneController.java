@@ -11,7 +11,6 @@ import java.util.Optional;
 
 import org.globant.agenda.agenda.exceptions.ResourceNotFoundException;
 import org.globant.agenda.agenda.model.Cellphone;
-import org.globant.agenda.agenda.model.Organization;
 import org.globant.agenda.agenda.repository.CellphoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
