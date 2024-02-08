@@ -7,6 +7,17 @@
 
 Project with the objective of developing an agenda system where the contact information of both individuals and companies are registered in a database, using the **Spring Boot** framework, following an agile methodology and implementing a deployment in the cloud.
 
+## Diagramming
+
+Relationship model & classes diagram.
+
+<p align="center">
+  <img src="/img/agenda-rm.png" alt="Agenda logo" width="200" height="200"/>
+</p>
+
+<p align="center">
+  <img src="/img/agenda-diagram-class.png" alt="Agenda logo" width="200" height="200"/>
+</p>
 
 ## Participants
 
