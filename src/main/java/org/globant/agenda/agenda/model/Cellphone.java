@@ -1,12 +1,14 @@
 package org.globant.agenda.agenda.model;
 
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+
 @Entity
+@Schema(description = "This model holds the person's number and its ID")
 public class Cellphone {
 
     @Id
