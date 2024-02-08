@@ -12,11 +12,11 @@ Project with the objective of developing an agenda system where the contact info
 Relationship model & classes diagram.
 
 <p align="center">
-  <img src="/img/agenda-rm.png" alt="Agenda logo" width="200" height="200"/>
+  <img src="/img/agenda-rm.png" alt="Agenda logo" width="830" height="470"/>
 </p>
 
 <p align="center">
-  <img src="/img/agenda-diagram-class.png" alt="Agenda logo" width="200" height="200"/>
+  <img src="/img/agenda-diagram-class.png" alt="Agenda logo" width="320" height="300"/>
 </p>
 
 ## Participants
